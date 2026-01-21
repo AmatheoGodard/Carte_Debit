@@ -12,7 +12,7 @@
 package pj_cartedebit;
 
 public class Cl_Connection {
-    public static String url = "votre_url_de_base_de_donnees";
+    public static String url = "//exemple.fr/exemple_Pj_CarteDebit";
     public static String login = "votre_identifiant";
     public static String password = "votre_mot_de_passe";
 }
