@@ -4,6 +4,8 @@
  */
 package pj_cartedebit;
 
+import pj_cartedebit.View.V_Main;
+
 /**
  *
  * @author amatheo
