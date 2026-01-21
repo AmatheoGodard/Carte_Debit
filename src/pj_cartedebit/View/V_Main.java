@@ -20,7 +20,7 @@ public class V_Main extends javax.swing.JFrame {
     public M_Users unUtil;
 
     public void Afficher() {
-        this.setSize(500, 500);
+        this.setSize(350, 400);
         this.setLocationRelativeTo(null);
         this.VerifConnexion();
         this.setVisible(true);
@@ -35,6 +35,7 @@ public class V_Main extends javax.swing.JFrame {
             this.pn_connexion.setVisible(false);
             this.mi_Deconnexion.setVisible(true);
             this.setTitle("Application gestion carte de débit : Bonjour " + unUtil.getName());
+            
         }
     }
 
@@ -55,14 +56,17 @@ public class V_Main extends javax.swing.JFrame {
         pn_connexion = new javax.swing.JPanel();
         lb_connexion = new javax.swing.JLabel();
         lb_login = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lb_password = new javax.swing.JLabel();
         ed_login = new javax.swing.JTextField();
         ed_password = new javax.swing.JTextField();
         bt_connexion = new javax.swing.JButton();
+        lb_msg_connexion = new javax.swing.JLabel();
         mb_menu = new javax.swing.JMenuBar();
         mn_fichier = new javax.swing.JMenu();
         mi_quitter = new javax.swing.JMenuItem();
         mi_Deconnexion = new javax.swing.JMenuItem();
+        mn_parametre = new javax.swing.JMenu();
+        mi_compte = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -77,7 +81,7 @@ public class V_Main extends javax.swing.JFrame {
 
         lb_login.setText("Identifiant :");
 
-        jLabel1.setText("Mot de passe :");
+        lb_password.setText("Mot de passe :");
 
         bt_connexion.setText("Connexion");
         bt_connexion.addActionListener(new java.awt.event.ActionListener() {
@@ -86,33 +90,38 @@ public class V_Main extends javax.swing.JFrame {
             }
         });
 
+        lb_msg_connexion.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lb_msg_connexion.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout pn_connexionLayout = new javax.swing.GroupLayout(pn_connexion);
         pn_connexion.setLayout(pn_connexionLayout);
         pn_connexionLayout.setHorizontalGroup(
             pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_connexionLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_connexionLayout.createSequentialGroup()
-                        .addGap(181, 181, 181)
+                        .addGap(75, 75, 75)
                         .addComponent(lb_connexion))
                     .addGroup(pn_connexionLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
                         .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(lb_password)
                             .addComponent(lb_login))
                         .addGap(30, 30, 30)
                         .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ed_login, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(ed_password)))
+                            .addComponent(ed_login)
+                            .addComponent(ed_password, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_connexionLayout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(bt_connexion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                        .addGap(58, 58, 58)
+                        .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_connexion, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(lb_msg_connexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         pn_connexionLayout.setVerticalGroup(
             pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_connexionLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(43, 43, 43)
                 .addComponent(lb_connexion)
                 .addGap(18, 18, 18)
                 .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -120,11 +129,13 @@ public class V_Main extends javax.swing.JFrame {
                     .addComponent(ed_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pn_connexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lb_password)
                     .addComponent(ed_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(bt_connexion)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lb_msg_connexion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         mn_fichier.setText("Fichier");
@@ -142,6 +153,18 @@ public class V_Main extends javax.swing.JFrame {
 
         mb_menu.add(mn_fichier);
 
+        mn_parametre.setText("Paramètre");
+
+        mi_compte.setText("Compte");
+        mi_compte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_compteActionPerformed(evt);
+            }
+        });
+        mn_parametre.add(mi_compte);
+
+        mb_menu.add(mn_parametre);
+
         setJMenuBar(mb_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,9 +179,9 @@ public class V_Main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(pn_connexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pn_connexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -186,6 +209,7 @@ public class V_Main extends javax.swing.JFrame {
             unUtil = leControl.connexionUtilis(login, mdp);
             
             if (unUtil == null) {
+                lb_msg_connexion.setText("Erreur de connexion.");
                 this.VerifConnexion();
             } else {
                 this.VerifConnexion();
@@ -195,6 +219,14 @@ public class V_Main extends javax.swing.JFrame {
             Logger.getLogger(V_Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_connexionActionPerformed
+
+    private void mi_compteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_compteActionPerformed
+        try {
+            this.leControl.aff_v_utilisateurs();
+        } catch (SQLException ex) {
+            Logger.getLogger(V_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mi_compteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,13 +267,16 @@ public class V_Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_connexion;
     private javax.swing.JTextField ed_login;
     private javax.swing.JTextField ed_password;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lb_connexion;
     private javax.swing.JLabel lb_login;
+    private javax.swing.JLabel lb_msg_connexion;
+    private javax.swing.JLabel lb_password;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenuItem mi_Deconnexion;
+    private javax.swing.JMenuItem mi_compte;
     private javax.swing.JMenuItem mi_quitter;
     private javax.swing.JMenu mn_fichier;
+    private javax.swing.JMenu mn_parametre;
     private javax.swing.JPanel pn_connexion;
     // End of variables declaration//GEN-END:variables
 }

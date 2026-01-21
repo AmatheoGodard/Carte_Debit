@@ -7,6 +7,7 @@ package pj_cartedebit;
 import java.sql.SQLException;
 import pj_cartedebit.Model.M_Users;
 import pj_cartedebit.View.V_Main;
+import pj_cartedebit.View.V_Utilisateur;
 
 /**
  *
@@ -15,13 +16,14 @@ import pj_cartedebit.View.V_Main;
 public class C_CarteDebit {
 
     private V_Main fm_main;
+    private V_Utilisateur fm_utilisateurs;
     private Db_mariadb baseRR;
     private M_Users utilConnecte;
 
     public C_CarteDebit() throws Exception {
         connection();
         fm_main = new V_Main(this);
-
+        fm_utilisateurs = new V_Utilisateur(this);
         fm_main.Afficher();
     }
 
@@ -32,12 +34,15 @@ public class C_CarteDebit {
     public void deconnexion() throws SQLException {
         baseRR.closeBase();
     }
-    
-    /* Model M_Users */    
-    
+
+    /* Model M_Users */
     public M_Users connexionUtilis(String login, String mdp) throws SQLException {
         utilConnecte = M_Users.connexion_log(baseRR, login, mdp);
         return utilConnecte;
+    }
+
+    public void aff_v_utilisateurs() throws SQLException {
+        fm_utilisateurs.Afficher();
     }
 
     /**
