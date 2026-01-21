@@ -1,7 +1,6 @@
 # Carte Débit Temporaire 🏦💳
 
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.oracle.com/java/)
-[![Licence](https://img.shields.io/badge/licence-MIT-yellow.svg)](LICENSE)
 
 ## 📖 Description
 
@@ -41,8 +40,7 @@ git clone https://github.com/AmatheoGodard/Carte_Debit.git
 
    * Clic droit sur le projet > `Clean and Build`
    * Le JAR se trouvera dans le dossier `dist/` du projet
-
-
+  
 ## 🗂 Structure du projet
 
 ```
