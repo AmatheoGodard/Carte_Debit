@@ -5,6 +5,7 @@
 package pj_cartedebit;
 
 import java.sql.SQLException;
+import pj_cartedebit.Model.M_Users;
 import pj_cartedebit.View.V_Main;
 
 /**
@@ -15,6 +16,7 @@ public class C_CarteDebit {
 
     private V_Main fm_main;
     private Db_mariadb baseRR;
+    private M_Users utilConnecte;
 
     public C_CarteDebit() throws Exception {
         connection();
@@ -29,6 +31,13 @@ public class C_CarteDebit {
 
     public void deconnexion() throws SQLException {
         baseRR.closeBase();
+    }
+    
+    /* Model M_Users */    
+    
+    public M_Users connexionUtilis(String login, String mdp) throws SQLException {
+        utilConnecte = M_Users.connexion_log(baseRR, login, mdp);
+        return utilConnecte;
     }
 
     /**

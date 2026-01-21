@@ -4,11 +4,13 @@
  */
 package pj_cartedebit.Model;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import pj_cartedebit.Db_mariadb;
 
 /**
@@ -170,7 +172,7 @@ public class M_Users {
                 + "email_verified_at='" + email_verified_at + "', "
                 + "password='" + password + "', "
                 + "remember_token='" + remember_token + "', "
-                + "commentaire='" + commentaire +"', "
+                + "commentaire='" + commentaire + "', "
                 + "created_at='" + created_at + "', "
                 + "updated_at='" + updated_at + "', "
                 + "id_role='" + id_roles + "' "
@@ -178,11 +180,98 @@ public class M_Users {
 
         db.sqlExec(sql);
     }
-    
+
     public void delete() throws SQLException {
         String sql;
         sql = "DELETE FROM mcd_users WHERE id=" + id_user + ";";
         db.sqlExec(sql);
     }
+
+    public static LinkedHashMap<Integer, M_Users> getRecords(Db_mariadb db) throws SQLException {
+        return getRecords(db, "1 = 1");
+    }
+
+    public static LinkedHashMap<Integer, M_Users> getRecords(Db_mariadb db, String clauseWhere) throws SQLException {
+        LinkedHashMap<Integer, M_Users> lesUtilisateurs;
+        lesUtilisateurs = new LinkedHashMap();
+        M_Users unUtilisateur;
+
+        int cle, idRole;
+        String name, email, mp, remember_token, commentaire;
+        LocalDateTime email_verfied_at, created_at, updated_at;
+
+        String sql;
+        sql = "SELECT * FROM mcd_users WHERE " + clauseWhere + " ORDER BY name";
+        ResultSet res;
+        res = db.sqlSelect(sql);
+
+        while (res.next()) {
+            cle = res.getInt("id");
+            name = res.getString("name");
+            email = res.getString("email");
+            email_verfied_at = res.getObject("email_verfied_at", LocalDateTime.class);
+            mp = res.getString("password");
+            remember_token = res.getString("remember_token");
+            commentaire = res.getString("commentaire");
+            created_at = res.getObject("created_at", LocalDateTime.class);
+            updated_at = res.getObject("updated_at", LocalDateTime.class);
+            idRole = res.getInt("idRole");
+
+            unUtilisateur = new M_Users(db, cle, idRole, name, email, mp, remember_token, commentaire, email_verfied_at, created_at, updated_at);
+            lesUtilisateurs.put(cle, unUtilisateur);
+        }
+
+        res.close();
+
+        return lesUtilisateurs;
+    }
+
+    public static M_Users connexion_log(Db_mariadb db, String login, String motPasse) throws SQLException {
+        M_Users unUtilisateur = null;
+        String sql, mp;
+        int idUtil;
+
+        int idRole;
+        String name, email, remember_token, commentaire;
+        LocalDateTime email_verfied_at, created_at, updated_at;
+
+        sql = "SELECT * FROM mcd_users"
+                + " WHERE name='" + login + "';";
+        ResultSet res;
+        res = db.sqlSelect(sql);
+
+        if (res.first()) {
+            System.out.println("Login trouvé");
+            mp = res.getString("password");
+            System.out.println(mp);
+            if (BCrypt.verifyer().verify(motPasse.toCharArray(), mp).verified) {
+
+                idUtil = res.getInt("id");
+                name = res.getString("name");
+                email = res.getString("email");
+                email_verfied_at = res.getObject("email_verified_at", LocalDateTime.class);
+                mp = res.getString("password");
+                remember_token = res.getString("remember_token");
+                commentaire = res.getString("commentaire");
+                created_at = res.getObject("created_at", LocalDateTime.class);
+                updated_at = res.getObject("updated_at", LocalDateTime.class);
+                idRole = res.getInt("id_role");
+
+                unUtilisateur = new M_Users(db, idUtil, idRole, name, email, mp, remember_token, commentaire, email_verfied_at, created_at, updated_at);
+            } else {
+                System.out.println("Mauvais Mot de passe");
+            }
+        }
+        res.close();
+        System.out.println(unUtilisateur);
+        return unUtilisateur;
+    }
+
+    @Override
+    public String toString() {
+        return "M_Users{" + "db=" + db + ", id_user=" + id_user + ", id_roles=" + id_roles + ", name=" + name + ", email=" + email + ", password=" + password + ", remember_token=" + remember_token + ", commentaire=" + commentaire + ", email_verified_at=" + email_verified_at + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
+    }
+    
+    
 
 }

@@ -8,19 +8,34 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pj_cartedebit.C_CarteDebit;
+import pj_cartedebit.Model.M_Users;
 
 /**
  *
  * @author amatheo
  */
 public class V_Main extends javax.swing.JFrame {
-    
+
     private C_CarteDebit leControl;
+    public M_Users unUtil;
 
     public void Afficher() {
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
+        this.VerifConnexion();
         this.setVisible(true);
+    }
+
+    public void VerifConnexion() {
+        if (unUtil == null) {
+            this.pn_connexion.setVisible(true);
+            this.mi_Deconnexion.setVisible(false);
+            this.setTitle("Application gestion carte de débit");
+        } else {
+            this.pn_connexion.setVisible(false);
+            this.mi_Deconnexion.setVisible(true);
+            this.setTitle("Application gestion carte de débit : Bonjour " + unUtil.getName());
+        }
     }
 
     public V_Main(C_CarteDebit leControleur) {
@@ -47,6 +62,7 @@ public class V_Main extends javax.swing.JFrame {
         mb_menu = new javax.swing.JMenuBar();
         mn_fichier = new javax.swing.JMenu();
         mi_quitter = new javax.swing.JMenuItem();
+        mi_Deconnexion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -64,6 +80,11 @@ public class V_Main extends javax.swing.JFrame {
         jLabel1.setText("Mot de passe :");
 
         bt_connexion.setText("Connexion");
+        bt_connexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_connexionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_connexionLayout = new javax.swing.GroupLayout(pn_connexion);
         pn_connexion.setLayout(pn_connexionLayout);
@@ -116,6 +137,9 @@ public class V_Main extends javax.swing.JFrame {
         });
         mn_fichier.add(mi_quitter);
 
+        mi_Deconnexion.setText("Déconnexion");
+        mn_fichier.add(mi_Deconnexion);
+
         mb_menu.add(mn_fichier);
 
         setJMenuBar(mb_menu);
@@ -152,6 +176,25 @@ public class V_Main extends javax.swing.JFrame {
             Logger.getLogger(V_Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void bt_connexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_connexionActionPerformed
+        String login, mdp;
+
+        login = ed_login.getText();
+        mdp = ed_password.getText();
+        try {
+            unUtil = leControl.connexionUtilis(login, mdp);
+            
+            if (unUtil == null) {
+                this.VerifConnexion();
+            } else {
+                this.VerifConnexion();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(V_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_connexionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +239,7 @@ public class V_Main extends javax.swing.JFrame {
     private javax.swing.JLabel lb_connexion;
     private javax.swing.JLabel lb_login;
     private javax.swing.JMenuBar mb_menu;
+    private javax.swing.JMenuItem mi_Deconnexion;
     private javax.swing.JMenuItem mi_quitter;
     private javax.swing.JMenu mn_fichier;
     private javax.swing.JPanel pn_connexion;
