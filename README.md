@@ -58,6 +58,12 @@ git clone https://github.com/AmatheoGodard/Carte_Debit.git
    * Clic droit sur le projet > `Clean and Build`
    * Le JAR se trouvera dans le dossier `dist/` du projet
 
+## 🗄 Modèle Conceptuel de Données (MCD)
+
+Pour visualiser les relations entre les tables et les champs de la base de données, consultez le MCD :
+
+![MCD Carte Débit Temporaire](docs/mcd.png)
+
 ## 🗂 Structure du projet
 
 ```
@@ -68,5 +74,6 @@ Carte_Debit/
 ├── .gitignore
 ├── build.xml                    # fichier de build NetBeans
 ├── manifest.mf                  # manifeste JAR
+├── docs/                        # documentation et images
 └── README.md
 ```
