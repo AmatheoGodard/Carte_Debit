@@ -4,6 +4,8 @@
  */
 package pj_cartedebit.Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import pj_cartedebit.Db_mariadb;
 
@@ -30,7 +32,7 @@ public class M_Produits {
         this.updated_at = updated_at;
     }
 
-    public M_Produits(Db_mariadb db, String code, String nom, String commentaire, float prix, LocalDateTime created_at, LocalDateTime updated_at) {
+    public M_Produits(Db_mariadb db, String code, String nom, String commentaire, float prix, LocalDateTime created_at, LocalDateTime updated_at) throws SQLException {
         this.db = db;
         this.code = code;
         this.nom = nom;
@@ -38,6 +40,15 @@ public class M_Produits {
         this.prix = prix;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        
+        String sql = "INSERT INTO mcd_produits (code, nom, prix, commentaire, created_at, update_at)"
+                        + " VALUES ('" + code + "', '" + nom + "', '" + prix + "', '" + commentaire + "', '" + created_at + "', '" + updated_at + "');";
+        db.sqlExec(sql);
+        ResultSet res;
+        res = db.sqlLastId();
+        res.first();
+        this.id = res.getInt("id");
+        res.close();
     }
 
     public M_Produits(Db_mariadb db, int id) {
