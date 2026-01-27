@@ -38,7 +38,20 @@ public class V_Utilisateur extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mb_menu = new javax.swing.JMenuBar();
+        mn_Fichier = new javax.swing.JMenu();
+        mi_Fermer = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        mn_Fichier.setText("Fichier");
+
+        mi_Fermer.setText("Fermer");
+        mn_Fichier.add(mi_Fermer);
+
+        mb_menu.add(mn_Fichier);
+
+        setJMenuBar(mb_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,7 +61,7 @@ public class V_Utilisateur extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 276, Short.MAX_VALUE)
         );
 
         pack();
@@ -90,5 +103,8 @@ public class V_Utilisateur extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar mb_menu;
+    private javax.swing.JMenuItem mi_Fermer;
+    private javax.swing.JMenu mn_Fichier;
     // End of variables declaration//GEN-END:variables
 }
