@@ -48,9 +48,8 @@ git clone https://github.com/AmatheoGodard/Carte_Debit.git
 
 3. Ajouter le fichier `Cl_Connection.java` dans le package `pj_cartedebit` avec vos informations personnelles de connexion à la base de données.
 
-4. Compiler et exécuter le projet :
+4. Exécuter le projet :
 
-   * Clic droit sur le projet dans NetBeans > `Clean and Build`
    * Clic droit > `Run` pour lancer l’application
 
 5. (Optionnel) Pour créer un fichier JAR exécutable :
