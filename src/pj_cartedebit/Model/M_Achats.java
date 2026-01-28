@@ -15,7 +15,7 @@ import pj_cartedebit.Db_mariadb;
  *
  * @author amatheo
  */
-public class M_Achat {
+public class M_Achats {
     
     private Db_mariadb db;
     private int id;
@@ -23,7 +23,7 @@ public class M_Achat {
     private float montant;
     private String commentaire;
 
-    public M_Achat(Db_mariadb db, int id, LocalDate dateAchat, float montant, String commentaire) {
+    public M_Achats(Db_mariadb db, int id, LocalDate dateAchat, float montant, String commentaire) {
         this.db = db;
         this.id = id;
         this.dateAchat = dateAchat;
@@ -31,7 +31,7 @@ public class M_Achat {
         this.commentaire = commentaire;
     }
 
-    public M_Achat(Db_mariadb db, LocalDate dateAchat, float montant, String commentaire) throws SQLException {
+    public M_Achats(Db_mariadb db, LocalDate dateAchat, float montant, String commentaire) throws SQLException {
         this.db = db;
         this.dateAchat = dateAchat;
         this.montant = montant;
@@ -47,7 +47,7 @@ public class M_Achat {
         res.close();
     }
 
-    public M_Achat(Db_mariadb db, int id) throws SQLException {
+    public M_Achats(Db_mariadb db, int id) throws SQLException {
         this.db = db;
         this.id = id;
         
@@ -111,14 +111,14 @@ public class M_Achat {
         db.sqlExec(sql);
     }
     
-    public static LinkedHashMap<Integer, M_Achat> getRecords(Db_mariadb db) throws SQLException {
+    public static LinkedHashMap<Integer, M_Achats> getRecords(Db_mariadb db) throws SQLException {
         return getRecords(db, "1 = 1");
     }
     
-    public static LinkedHashMap<Integer, M_Achat> getRecords(Db_mariadb db, String clauseWhere) throws SQLException {
-        LinkedHashMap<Integer, M_Achat> lesAchats;
+    public static LinkedHashMap<Integer, M_Achats> getRecords(Db_mariadb db, String clauseWhere) throws SQLException {
+        LinkedHashMap<Integer, M_Achats> lesAchats;
         lesAchats = new LinkedHashMap<>();
-        M_Achat unAchat;
+        M_Achats unAchat;
         
         int cle;
         float montant;
@@ -135,7 +135,7 @@ public class M_Achat {
             montant = res.getFloat("montant");
             commentaire = res.getString("commentaire");
             
-            unAchat = new M_Achat(db, cle, dateAchat, montant, commentaire);
+            unAchat = new M_Achats(db, cle, dateAchat, montant, commentaire);
             lesAchats.put(cle, unAchat);
         }
         
@@ -158,7 +158,7 @@ public class M_Achat {
         Db_mariadb mabase;
         mabase = new Db_mariadb(Cl_Connection.url, Cl_Connection.login, Cl_Connection.password);
         
-        M_Achat unAchat;
+        M_Achats unAchat;
         
         /* Test du 1er constructeur
         unAchat = new M_Achat(mabase, 1, LocalDate.now(), 10, "Test du 1er constructeur");
@@ -189,10 +189,10 @@ public class M_Achat {
         
         //Test du record set +affichage avec sans et avec condition Where
         //Déclarer un objet dictionnaire
-        LinkedHashMap<Integer, M_Achat> lesAchats;
+        LinkedHashMap<Integer, M_Achats> lesAchats;
 
         //Appeler la méthode getRecods
-        lesAchats = M_Achat.getRecords(mabase);
+        lesAchats = M_Achats.getRecords(mabase);
 
         //Afficher le contenu du dictionnaire
         for (Integer uneCle : lesAchats.keySet()) {

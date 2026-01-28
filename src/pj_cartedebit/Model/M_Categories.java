@@ -10,13 +10,13 @@ import pj_cartedebit.Db_mariadb;
  *
  * @author amatheo
  */
-public class M_Categorie {
+public class M_Categories {
     
     private Db_mariadb db;
     private int id;
     private String code, nom, commentaire;
 
-    public M_Categorie(Db_mariadb db, int id, String code, String nom, String commentaire) {
+    public M_Categories(Db_mariadb db, int id, String code, String nom, String commentaire) {
         this.db = db;
         this.id = id;
         this.code = code;
@@ -24,7 +24,7 @@ public class M_Categorie {
         this.commentaire = commentaire;
     }
 
-    public M_Categorie(Db_mariadb db, String code, String nom, String commentaire) {
+    public M_Categories(Db_mariadb db, String code, String nom, String commentaire) {
         this.db = db;
         this.code = code;
         this.nom = nom;

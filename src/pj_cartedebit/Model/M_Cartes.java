@@ -15,14 +15,14 @@ import pj_cartedebit.Db_mariadb;
  *
  * @author amatheo
  */
-public class M_Carte {
+public class M_Cartes {
     
     private Db_mariadb db;
     private int id, idCommande;
     private float soldeInitial, soldeActuel;
     private String numero, codeSecret, visage, commentaire;
 
-    public M_Carte(Db_mariadb db, int id, int idCommande, float soldeInitial, float soldeActuel, String numero, String codeSecret, String visage, String commentaire) {
+    public M_Cartes(Db_mariadb db, int id, int idCommande, float soldeInitial, float soldeActuel, String numero, String codeSecret, String visage, String commentaire) {
         this.db = db;
         this.id = id;
         this.idCommande = idCommande;
@@ -34,7 +34,7 @@ public class M_Carte {
         this.commentaire = commentaire;
     }
 
-    public M_Carte(Db_mariadb db, String numero, float soldeInitial, float soldeActuel, String codeSecret, String visage, String commentaire, int idCommande) throws SQLException {
+    public M_Cartes(Db_mariadb db, String numero, float soldeInitial, float soldeActuel, String codeSecret, String visage, String commentaire, int idCommande) throws SQLException {
         this.db = db;
         this.idCommande = idCommande;
         this.soldeInitial = soldeInitial;
@@ -54,7 +54,7 @@ public class M_Carte {
         res.close();
     }
 
-    public M_Carte(Db_mariadb db, int id) throws SQLException {
+    public M_Cartes(Db_mariadb db, int id) throws SQLException {
         this.db = db;
         this.id = id;
         
@@ -158,14 +158,14 @@ public class M_Carte {
         db.sqlExec(sql);
     }
     
-    public static LinkedHashMap<Integer, M_Carte> getRecords(Db_mariadb db) throws SQLException {
+    public static LinkedHashMap<Integer, M_Cartes> getRecords(Db_mariadb db) throws SQLException {
         return getRecords(db, "1 = 1");
     }
     
-    public static LinkedHashMap<Integer, M_Carte> getRecords (Db_mariadb db, String clauseWhere) throws SQLException {
-        LinkedHashMap<Integer, M_Carte> lesCartes;
+    public static LinkedHashMap<Integer, M_Cartes> getRecords (Db_mariadb db, String clauseWhere) throws SQLException {
+        LinkedHashMap<Integer, M_Cartes> lesCartes;
         lesCartes = new LinkedHashMap<>();
-        M_Carte uneCarte;
+        M_Cartes uneCarte;
         
         int cle, idCommande;
         String numero, codeSecret, visage, commentaire;
@@ -185,7 +185,7 @@ public class M_Carte {
             commentaire = res.getString("commentaire");
             idCommande = res.getInt("id_commande");
             
-            uneCarte = new M_Carte(db, cle, idCommande, soldeInitial, soldeActuel, numero, codeSecret, visage, commentaire);
+            uneCarte = new M_Cartes(db, cle, idCommande, soldeInitial, soldeActuel, numero, codeSecret, visage, commentaire);
             lesCartes.put(cle, uneCarte);
         }
         
@@ -208,7 +208,7 @@ public class M_Carte {
         Db_mariadb mabase;
         mabase = new Db_mariadb(Cl_Connection.url, Cl_Connection.login, Cl_Connection.password);
         
-        M_Carte uneCarte;
+        M_Cartes uneCarte;
         
         /* Test du 1er constructeur 
         uneCarte = new M_Carte(mabase, 1, 0, 400, 400, "1234123412341234", "0000", "jsp", "Test du 1er Constructeur");
@@ -243,10 +243,10 @@ public class M_Carte {
         
         //Test du record set +affichage avec sans et avec condition Where
         //Déclarer un objet dictionnaire
-        LinkedHashMap<Integer, M_Carte> lesCartes;
+        LinkedHashMap<Integer, M_Cartes> lesCartes;
 
         //Appeler la méthode getRecods
-        lesCartes = M_Carte.getRecords(mabase);
+        lesCartes = M_Cartes.getRecords(mabase);
 
         //Afficher le contenu du dictionnaire
         for (Integer uneCle : lesCartes.keySet()) {
