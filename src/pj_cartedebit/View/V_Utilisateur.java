@@ -1,5 +1,8 @@
 package pj_cartedebit.View;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pj_cartedebit.C_CarteDebit;
 
 /*
@@ -43,10 +46,20 @@ public class V_Utilisateur extends javax.swing.JFrame {
         mi_Fermer = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         mn_Fichier.setText("Fichier");
 
         mi_Fermer.setText("Fermer");
+        mi_Fermer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_FermerActionPerformed(evt);
+            }
+        });
         mn_Fichier.add(mi_Fermer);
 
         mb_menu.add(mn_Fichier);
@@ -66,6 +79,19 @@ public class V_Utilisateur extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            leControl.deconnexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(V_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void mi_FermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_FermerActionPerformed
+        this.formWindowClosing(null);
+        System.exit(0);
+    }//GEN-LAST:event_mi_FermerActionPerformed
 
 //    /**
 //     * @param args the command line arguments
